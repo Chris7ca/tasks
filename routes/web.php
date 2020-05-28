@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',         'TasksController@index')->name('tasks.index');
 
-Auth::routes();
+Route::get('login',     'Auth\LoginController@showLoginForm')->name('login'); // ruta de la vista
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('signin',   'Auth\LoginController@login')->name('signin'); // ruta del post del login
+
+Route::post('logout',   'Auth\LoginController@logout')->name('logout'); // ruta de el logout
+
+// Auth::routes();
+
+Route::get('/app',      'TasksController@app')->name('tasks.app');
